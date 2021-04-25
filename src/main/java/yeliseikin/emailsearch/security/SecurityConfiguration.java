@@ -31,11 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
              //   .anyRequest().permitAll()
                 .antMatchers("/parse/page").permitAll()
                 .antMatchers("/parse/page/**").permitAll()
-            //   .antMatchers("/parse/all").permitAll()
-            //    .antMatchers("/site/**").permitAll()
-            //    .antMatchers("/sites/**").permitAll()
-            //    .antMatchers("/sitemails").permitAll()
-            //    .antMatchers("/emaillist").permitAll()
+                .antMatchers("/parse/all").permitAll()
+                .antMatchers("/parse/setdepth").permitAll()
                 .antMatchers("/users/signin").permitAll()
 
                  .antMatchers("/v2/api-docs").permitAll()
@@ -47,6 +44,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/public").permitAll()
 
+                .antMatchers("/site/**").hasAnyRole("ROLE_ADMIN","ROLE_CSR")
+                .antMatchers("/sites/**").hasAnyRole("ROLE_ADMIN","ROLE_CSR")
+                .antMatchers("/sitemails").hasAnyRole("ROLE_ADMIN","ROLE_CSR")
+                .antMatchers("/emaillist").hasAnyRole("ROLE_ADMIN","ROLE_CSR")
                 // Disallow everything else..
                 .anyRequest().authenticated();
 
